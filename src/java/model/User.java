@@ -15,15 +15,14 @@ import java.util.HashSet;
  * @author kalleguld
  */
 public class User {
-	//TODO 
 	
 	private boolean admin;
 	private String username;
 	private String password;
 	
-	Collection<Post> posts;
-	Collection<PostThread> threads;
-	Collection<Category> moderatedCategories;
+	private final Collection<Post> posts;
+	private final Collection<PostThread> threads;
+	private final Collection<Category> moderatedCategories;
 
 	public User(String username, String password) {
 		this.username = username;
@@ -49,18 +48,24 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
+	
 	public Collection<Post> getPosts() {
 		return new ArrayList<>(posts);
 	}
+	
+	
 	void addPost(Post post) {
-		posts.add(post);
+		if (!posts.contains(post)) {
+			posts.add(post);
+		}
 	}
 	
 	void removePost(Post post) {
+		
 		posts.remove(post);
 	}
 
@@ -69,11 +74,13 @@ public class User {
 	}
 	
 	void addPostThread(PostThread pt) {
-		//TODO 
+		if (!threads.contains(pt)) {
+			threads.add(pt);
+		}
 	}
 	
 	void removePostThread(PostThread pt) {
-		//TODO 
+		threads.remove(pt);
 	}
 
 	public Collection<Category> getModeratedCategories() {
@@ -81,16 +88,20 @@ public class User {
 	}
 
 	void addModeratedCategory(Category c) {
-		//TODO 
+		if (!moderatedCategories.contains(c)) {
+			moderatedCategories.add(c);
+		}
 	}
 	
 	void removeModeratedCategory(Category c) {
-		//TODO 
+		moderatedCategories.remove(c);
 	}
 	
 	public boolean doesPasswordMatch(String pw) {
-		//TODO 
-		return true;
+		if (this.password != null) {
+			return this.password.equals(pw);
+		}
+		return false;
 	}
 	
 	
