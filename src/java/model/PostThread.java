@@ -6,6 +6,7 @@
 
 package model;
 
+import java.util.ArrayList;
 /**
  *
  * @author Sigersted
@@ -14,7 +15,7 @@ public class PostThread {
     
     private String topic;
     private Category category;
-    private ArrayList<Post> posts = new ArrayList<Post>()
+    private ArrayList<Post> posts = new ArrayList<Post>();
 
     public PostThread(String topic, Category category) {
         this.topic = topic;
@@ -29,8 +30,8 @@ public class PostThread {
         this.topic = topic;
     }
     
-    public void createPost(String text) {
-        Post post = new Post(text);
+    public void createPost(String text, User user) {
+        Post post = new Post(text, user);
         posts.add(post);
     }
     
