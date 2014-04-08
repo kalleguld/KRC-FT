@@ -4,4 +4,3 @@ hs_err_pid*
 *.vpp~*
 
 /nbproject/private/
-/build/

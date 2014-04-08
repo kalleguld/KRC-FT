@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
- <h:head>
+    <h:head>
         <title>Login</title>
-        <link rel="stylesheet" href="CSS/CSSLayout.css"/>
+        <link rel="StyleSheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
         <h:form>
@@ -20,6 +20,7 @@
                 </tr>
             </table>
             <h:commandButton value="Login" action="#{userBean.login()}" />
+            <h:commandButton value="Opret ny bruger" action="OpretLogin" />
         </h:form>
     </h:body>
 </html>
