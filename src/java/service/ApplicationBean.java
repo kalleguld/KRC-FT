@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -61,18 +58,19 @@ public class ApplicationBean {
 		return u;
 	}
 	public PostThread createThread(String topic, Category category, User owner) {
-		//TODO 
 		PostThread pt = new PostThread(topic, category, new ArrayList());
 		threads.add(pt);
 		return pt;
 	}
 	public Post createPost(PostThread thread, String text, User owner) {
-		//TODO 
-		return null;
+		Post p = new Post(text, new Date(), owner);
+		posts.add(p);
+		return p;
 	}
 	public Category createCategory(User owner, String topic) {
-		//TODO 
-		return null;
+		Category c = new Category(topic, new ArrayList<User>(), new ArrayList<PostThread>());
+		c.addModerator(owner);
+		return c;
 	}
 	
 	private class ROIterator<E> implements Iterator<E> {
@@ -96,7 +94,8 @@ public class ApplicationBean {
 
 		@Override
 		public void remove() {
-			throw new UnsupportedOperationException();
+			throw new UnsupportedOperationException("Remove cannot be called from a "
+					+ "Read-only Iterator");
 		}
 		
 	}
