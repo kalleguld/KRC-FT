@@ -158,7 +158,7 @@ public class SessionBean implements Serializable {
     }
     
     public String logout() {
-        String navigate = null;
+        String navigate;
         if(currentUser != null) {
             currentUser = null;
             navigate = "index";
@@ -197,5 +197,11 @@ public class SessionBean implements Serializable {
     public void editPost() {
         if(currentUser == currentPost.getUser())
         currentPost.setText(this.postText);
+    }
+    
+    // Lav en side der hedder newPost som viser alle posts i en thread
+    // Lav en side som viser alle brugere i systemet.
+    public void creatAndStoreSomeObjects() {
+        createUser();
     }
 }
