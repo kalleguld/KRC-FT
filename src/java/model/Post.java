@@ -33,14 +33,15 @@ public class Post {
     public void setDate(Date date) {
         this.date = date;
     }
-    
+
     public User getUser() {
         return user;
     }
-    
+
     public void setUser(User user) {
-        if(this.user != user) 
+        if (this.user != user) {
             this.user = user;
+        }
     }
 
 }
