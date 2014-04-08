@@ -1,6 +1,6 @@
 *.class
 hs_err_pid*
-
+/build/*
 *.vpp~*
 
 /nbproject/private/
