@@ -7,17 +7,18 @@ import java.util.ArrayList;
  * @author Randi
  */
 public class Category {
-    
+
     private String topic;
     private ArrayList<User> moderators;
-    private ArrayList<PostThread> postThread;
+    private ArrayList<PostThread> postThreads;
 
     public Category() {
     }
 
-    public Category(String topic, ArrayList<User> moderators) {
+    public Category(String topic, ArrayList<User> moderators, ArrayList<PostThread> postThreads) {
         this.topic = topic;
         this.moderators = moderators;
+        this.postThreads = postThreads;
     }
 
     public String getTopic() {
@@ -29,44 +30,43 @@ public class Category {
     }
 
     public ArrayList<User> getModerators() {
-        return new ArrayList <User> (moderators);
+        return new ArrayList<User>(moderators);
     }
 
     public void setModerators(ArrayList<User> moderators) {
         this.moderators = moderators;
     }
-    
-    public void addUser (User moderator) {
-        if(!moderators.contains(moderator)) {
+
+    public void addModerator(User moderator) {
+        if (!moderators.contains(moderator)) {
             moderators.add(moderator);
-            moderator.addCategory(this);
+            moderator.addModeratedCategory(this);
         }
     }
-    
-    public void removeUser (User moderator){
-        if(moderators.contains(moderator)) {
+
+    public void removeModerator(User moderator) {
+        if (moderators.contains(moderator)) {
             moderators.remove(moderator);
-            moderator.removeCategory(this);
+            moderator.addModeratedCategory(this);
         }
     }
-    
-    public void addPostThread() {
-        if(!postThread.contains(postThread)) {
-            postThread.add(postThread);
-            postThread.add(postThread);
-        }
-    }
-    
-    public void createPostThread(PostThread postThreads) {
-        PostThread postThread = new PostThread(postThreads);
+
+    public PostThread createPostThread(String topic, Category category, ArrayList<Post> posts) {
+        PostThread postThread = new PostThread(topic, category, posts);
         postThreads.add(postThread);
         return postThread;
     }
-    
-    public void deletePostThread() {
-        if(postThread.contains(postThread)) {
-            postThread.remove(postThread);
+
+    public void addPostThread(PostThread postThread) {
+        if (!postThreads.contains(postThread)) {
+            postThreads.add(postThread);
         }
     }
-    
+
+    public void deletePostThread(PostThread postThread) {
+        if (postThreads.contains(postThread)) {
+            postThreads.remove(postThread);
+        }
+    }
+
 }
