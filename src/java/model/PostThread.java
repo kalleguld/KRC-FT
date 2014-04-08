@@ -17,13 +17,16 @@ public class PostThread {
     private String topic;
     private Category category;
     private ArrayList<Post> posts = new ArrayList<Post>();
+	private final int id;
 
-    public PostThread(String topic, Category category, ArrayList<Post> posts) {
+    public PostThread(String topic, Category category, int id) {
         this.topic = topic;
         this.category = category;
-        this.posts = posts;
+		this.id = id;
+        this.posts = posts = new ArrayList<>();
     }
 
+	
     public String getTopic() {
         return topic;
     }
@@ -32,8 +35,8 @@ public class PostThread {
         this.topic = topic;
     }
 
-    public void createPost(String text, Date date, User user) {
-        Post post = new Post(text, date, user);
+    public void createPost(String text, Date date, User user, int id) {
+        Post post = new Post(text, date, user, id);
         posts.add(post);
         //return post;
     }

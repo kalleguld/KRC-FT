@@ -28,6 +28,9 @@ public class ApplicationBean {
 	private final Collection<Category> categories;
 	private final Collection<PostThread> threads;
 	private final Collection<Post> posts;
+	private int nextCategoryId = 0;
+	private int nextThreadId = 0;
+	private int nextPostId = 0;
 	
 	public ApplicationBean() {
 		
@@ -58,17 +61,20 @@ public class ApplicationBean {
 		return u;
 	}
 	public PostThread createThread(String topic, Category category, User owner) {
-		PostThread pt = new PostThread(topic, category, new ArrayList());
+		PostThread pt = new PostThread(topic, category, nextThreadId);
+		nextThreadId++;
 		threads.add(pt);
 		return pt;
 	}
 	public Post createPost(PostThread thread, String text, User owner) {
-		Post p = new Post(text, new Date(), owner);
+		Post p = new Post(text, new Date(), owner, nextPostId);
+		nextPostId++;
 		posts.add(p);
 		return p;
 	}
 	public Category createCategory(User owner, String topic) {
-		Category c = new Category(topic, new ArrayList<User>(), new ArrayList<PostThread>());
+		Category c = new Category(topic, nextCategoryId);
+		nextCategoryId++;
 		c.addModerator(owner);
 		return c;
 	}

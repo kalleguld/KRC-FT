@@ -11,16 +11,15 @@ public class Category {
     private String topic;
     private ArrayList<User> moderators;
     private ArrayList<PostThread> postThreads;
+	private final int id;
 
-    public Category() {
-    }
-
-    public Category(String topic, ArrayList<User> moderators, ArrayList<PostThread> postThreads) {
+    public Category(String topic, int id) {
         this.topic = topic;
-        this.moderators = moderators;
-        this.postThreads = postThreads;
+		this.id = id;
+        this.moderators = new ArrayList<>();
+        this.postThreads = new ArrayList<>();
     }
-
+	
     public String getTopic() {
         return topic;
     }
@@ -37,6 +36,7 @@ public class Category {
         this.moderators = moderators;
     }
 
+	
     public void addModerator(User moderator) {
         if (!moderators.contains(moderator)) {
             moderators.add(moderator);
@@ -51,8 +51,12 @@ public class Category {
         }
     }
 
-    public PostThread createPostThread(String topic, Category category, ArrayList<Post> posts) {
-        PostThread postThread = new PostThread(topic, category, posts);
+	public int getId() {
+		return id;
+	}
+
+    public PostThread createPostThread(String topic, Category category, int id) {
+        PostThread postThread = new PostThread(topic, category, id);
         postThreads.add(postThread);
         return postThread;
     }
