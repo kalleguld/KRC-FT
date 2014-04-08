@@ -6,6 +6,7 @@
 
 package service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,39 +41,63 @@ public class ApplicationBean {
 	}
 	
 	public User getUserByName(String name) {
-		//TODO 
-		return null;
+		return users.get(name);
 	}
 	public Iterator<User> userIterator() {
-		//TODO 
-		return null;
+		return new ROIterator<>(users.values().iterator());
 	}
 	public Iterator<Post> postIterator() {
-		//TODO 
-		return null;
+		return new ROIterator<>(posts.iterator());
 	}
 	public Iterator<Category> categoryIterator() {
-		//TODO 
-		return null;
+		return new ROIterator<>(categories.iterator());
 	}
 	public Iterator<PostThread> threadIterator() {
-		//TODO 
-		return null;
+		return new ROIterator<>(threads.iterator());
 	}
 	public User createUser(String name, String password) {
-		//TODO 
-		return null;
+		User u = new User(name, password);
+		users.put(name, u);
+		return u;
 	}
 	public PostThread createThread(String topic, Category category, User owner) {
 		//TODO 
-		return null;
+		PostThread pt = new PostThread(topic, category, new ArrayList());
+		threads.add(pt);
+		return pt;
 	}
-	public Post createPost(PostThread thread, String topic, String text, User owner) {
+	public Post createPost(PostThread thread, String text, User owner) {
 		//TODO 
 		return null;
 	}
 	public Category createCategory(User owner, String topic) {
 		//TODO 
 		return null;
+	}
+	
+	private class ROIterator<E> implements Iterator<E> {
+
+		Iterator<E> inner;
+
+		public ROIterator(Iterator<E> inner) {
+			this.inner = inner;
+		}
+		
+		
+		@Override
+		public boolean hasNext() {
+			return inner.hasNext();
+		}
+
+		@Override
+		public E next() {
+			return inner.next();
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+		
 	}
 }
