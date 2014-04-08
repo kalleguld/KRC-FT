@@ -2,9 +2,9 @@ F/*
     Created on : 08-04-2014, 09:24:40
     Author     : Randi
 */
-
 body {
-    background-image: url('flower-wallpaper.jpg');
+    background-color: yellow;
+    background-image: url('CSS/flower-wallpaper.jpg');
    // background-repeat: no-repeat;
    // background-position: center;
    // background-position: center top;

@@ -25,7 +25,7 @@ public class SessionBean implements Serializable {
 
     //Bruges til at hente informationer omkring der hvor man er nu
     private String currentTopic;    
-    private User currentUser;
+    private User currentUser = null;
     private String postText;
     private Category currentCategory;
     //Bruges til at lave nye threads
@@ -129,18 +129,21 @@ public class SessionBean implements Serializable {
         this.currentText = currentText;
     }
 
+    //---------------------------------------------------------------------
+    //Rigtige metoder
     public void createUser() {
         application.createUser(this.loginName, this.loginPassword);
     }
 
     public void deleteUser() {
-        if (currentUser.isAdmin()) {
-            application.removeUser(selectedUser);
-        }
+//        if (currentUser.isAdmin()) {
+//            application.removeUser(selectedUser);
+//        }
     }
 
     public void deleteSelf() {
-        application.removeUser(currentUser);
+//        if(currentUser != null)
+//        application.removeUser(currentUser);
     }
 
     public String login() {
@@ -165,6 +168,7 @@ public class SessionBean implements Serializable {
     }
     
     public void createThread() {
+        if(currentUser != null)
         application.createThread(this.threadTopic, this.currentCategory, this.currentUser);
     }
     
@@ -173,6 +177,7 @@ public class SessionBean implements Serializable {
     }
 
     public void createCategory(){
+        if(currentUser != null)
         application.createCategory(this.currentUser, this.threadTopic);
     }
     
