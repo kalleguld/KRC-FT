@@ -212,6 +212,34 @@ public class SessionBean implements Serializable {
     // Lav en side der hedder newPost som viser alle posts i en thread
     // Lav en side som viser alle brugere i systemet.
     public void creatAndStoreSomeObjects() {
-        createUser();
+        User user1 = application.createUser("Lars", "1234");
+        User user2 = application.createUser("Hans", "qwerty");
+        User user3 = application.createUser("Bo", "5678");
+        User user4 = application.createUser("Kim", "123456");
+        User user5 = application.createUser("Helle", "password");
+        User user6 = application.createUser("Line", "password1");
+        User user7 = application.createUser("Louise", "nej");
+        User user8 = application.createUser("Sine", "måske");
+        
+        Category cat1 = application.createCategory(user1, "How to clean a toilet");
+        Category cat2 = application.createCategory(user1, "How to sit on a toilet");
+        Category cat3 = application.createCategory(user1, "How to spell to toilet");
+        Category cat4 = application.createCategory(user1, "Is JSF shit?");
+        Category cat5 = application.createCategory(user1, "What time is it?");
+        
+        PostThread pt1 = application.createThread("I know i know!", cat5, user1);
+        PostThread pt2 = application.createThread("If think its safe to say so", cat4, user2);
+        PostThread pt3 = application.createThread("I think you just did", cat3, user1);
+        PostThread pt4 = application.createThread("I've been wondering the same thing", cat2, user3);
+        PostThread pt5 = application.createThread("Shhh", cat1, user4);
+        PostThread pt6 = application.createThread("It's irrellevant", cat5, user4);
+        
+        Post p1 = application.createPost(pt1, "Hello world", user1);
+        Post p2 = application.createPost(pt2, "What?", user2);
+        Post p3 = application.createPost(pt3, "????", user3);
+        Post p4 = application.createPost(pt4, "Glasses", user4);
+        Post p5 = application.createPost(pt5, "Damn you all", user5);
+        Post p6 = application.createPost(pt6, "I like baloons", user6);
+        Post p7 = application.createPost(pt1, "I got hair in my mouth", user7);
     }
 }
