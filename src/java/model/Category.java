@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -9,8 +10,8 @@ import java.util.ArrayList;
 public class Category {
 
     private String topic;
-    private ArrayList<User> moderators;
-    private ArrayList<PostThread> postThreads;
+    private List<User> moderators;
+    private List<PostThread> postThreads;
 	private final int id;
 
     public Category(String topic, int id) {
@@ -28,11 +29,17 @@ public class Category {
         this.topic = topic;
     }
 
-    public ArrayList<User> getModerators() {
-        return new ArrayList<User>(moderators);
+    public List<User> getModerators() {
+        return new ArrayList<>(moderators);
     }
+	public List<PostThread> getThreads() {
+		return new ArrayList<>(postThreads);
+	}
 
-    public void setModerators(ArrayList<User> moderators) {
+	public int getNumThreads() {
+		return postThreads.size();
+	}
+    public void setModerators(List<User> moderators) {
         this.moderators = moderators;
     }
 

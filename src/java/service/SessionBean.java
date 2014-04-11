@@ -7,6 +7,7 @@ package service;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import model.Category;
 import model.Post;
@@ -20,7 +21,7 @@ import model.User;
 @Named
 @SessionScoped
 public class SessionBean implements Serializable {
-    //associeringer 
+    @Inject
     private ApplicationBean application;
 
     //Bruges til at hente informationer omkring der hvor man er nu
@@ -129,6 +130,11 @@ public class SessionBean implements Serializable {
         this.currentText = currentText;
     }
 
+	public void setApplication(ApplicationBean application) {
+		this.application = application;
+	}
+	
+
     //---------------------------------------------------------------------
     //Rigtige metoder
     public void createUser() {
@@ -227,7 +233,8 @@ public class SessionBean implements Serializable {
     
     // Lav en side der hedder newPost som viser alle posts i en thread
     // Lav en side som viser alle brugere i systemet.
-    public void creatAndStoreSomeObjects() {
+    public String creatAndStoreSomeObjects() {
+		
         User user1 = application.createUser("Lars", "1234");
         User user2 = application.createUser("Hans", "qwerty");
         User user3 = application.createUser("Bo", "5678");
@@ -257,5 +264,8 @@ public class SessionBean implements Serializable {
         Post p5 = application.createPost(pt5, "Damn you all", user5);
         Post p6 = application.createPost(pt6, "I like baloons", user6);
         Post p7 = application.createPost(pt1, "I got hair in my mouth", user7);
+		
+		
+		return "index";
     }
 }

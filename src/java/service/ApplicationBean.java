@@ -65,6 +65,7 @@ public class ApplicationBean {
 		PostThread pt = new PostThread(topic, category, nextThreadId);
 		nextThreadId++;
 		threads.add(pt);
+		category.addPostThread(pt);
 		return pt;
 	}
 	public Post createPost(PostThread thread, String text, User owner) {
@@ -77,6 +78,7 @@ public class ApplicationBean {
 		Category c = new Category(topic, nextCategoryId);
 		nextCategoryId++;
 		c.addModerator(owner);
+		categories.add(c);
 		return c;
 	}
 
