@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -78,6 +79,24 @@ public class ApplicationBean {
 		c.addModerator(owner);
 		return c;
 	}
+
+	public List<User> getUsers() {
+		return new ArrayList<>(users.values());
+	}
+
+	public List<Category> getCategories() {
+		return new ArrayList<>(categories);
+	}
+
+	public List<PostThread> getThreads() {
+		return new ArrayList<>(threads);
+	}
+
+	public List<Post> getPosts() {
+		return new ArrayList<>(posts);
+	}
+	
+	
 	
 	private class ROIterator<E> implements Iterator<E> {
 

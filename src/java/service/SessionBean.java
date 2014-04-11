@@ -198,6 +198,16 @@ public class SessionBean implements Serializable {
         if(currentUser == currentPost.getUser())
         currentPost.setText(this.postText);
     }
+	
+	public String selectCategory(Category c) {
+		currentCategory = c;
+		return "viewThreads";
+	}
+	
+	public String selectThread(PostThread pt) {
+		currentThread = pt;
+		return "viewPosts";
+	}
     
     // Lav en side der hedder newPost som viser alle posts i en thread
     // Lav en side som viser alle brugere i systemet.
