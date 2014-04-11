@@ -136,12 +136,14 @@ public class SessionBean implements Serializable {
     }
 
     public void deleteUser() {
+		//TODO 
 //        if (currentUser.isAdmin()) {
 //            application.removeUser(selectedUser);
 //        }
     }
 
     public void deleteSelf() {
+		//TODO 
 //        if(currentUser != null)
 //        application.removeUser(currentUser);
     }
@@ -149,54 +151,68 @@ public class SessionBean implements Serializable {
     public String login() {
         User validUser = application.getUserByName(this.loginName);
         if (validUser.doesPasswordMatch(loginPassword)) {
-            currentUser = validUser; // for at spare plads
-            return null;
+            currentUser = validUser;
+			this.loginPassword = null;
+            return "index";
         } else {
-            currentUser = null; // for at nulstille felterne
+            currentUser = null;
             return null;
         }
     }
     
     public String logout() {
-        String navigate;
-        if(currentUser != null) {
-            currentUser = null;
-            navigate = "index";
-        } else navigate = null;
-        
-        return navigate;
+        currentUser = null;
+        return "index";
     }
     
-    public void createThread() {
-        if(currentUser != null)
-        application.createThread(this.threadTopic, this.currentCategory, this.currentUser);
+    public String createThread() {
+        String out = null;
+		if(currentUser != null) {
+			PostThread pt = application.createThread(this.threadTopic, 
+									this.currentCategory, 
+									this.currentUser);
+			this.currentThread = pt;
+			application.createPost(pt, this.currentText, currentUser);
+			out = "viewPosts";
+		}
+		return out;
     }
     
     public void deleteThread() {
         //TODO
     }
 
-    public void createCategory(){
-        if(currentUser != null)
-        application.createCategory(this.currentUser, this.threadTopic);
+    public String createCategory(){
+        if(currentUser != null) {
+			application.createCategory(this.currentUser, this.threadTopic);
+		}
+		return "index";
     }
     
     public void deleteCategory(){
         //TODO
     }
     
-    public void createPost() {
-        if(currentUser != null)
-        application.createPost(currentThread, postText, currentUser);
+    public String createPost() {
+		String out = "login";
+        if(currentUser != null) {
+	        application.createPost(currentThread, postText, currentUser);
+			out = null;
+		}
+		return out;
     }
 
     public void deletePost() {
-        
+        //TODO 
     }
     
-    public void editPost() {
-        if(currentUser == currentPost.getUser())
-        currentPost.setText(this.postText);
+    public String editPost() {
+		//TODO where should the user go after editing a post?
+		String out = null;
+        if(currentUser == currentPost.getUser()){
+			currentPost.setText(this.postText);
+		}
+		return out;
     }
 	
 	public String selectCategory(Category c) {
