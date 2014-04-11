@@ -1,27 +1,23 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Login</title>
-        <link rel="StyleSheet" href="CSS/CSSLayout.css"/>
+        <title>Categories</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h3>Please enter your name and password.</h3>
-            <table>
-                <tr>
-                    <td>Name:</td>
-                    <td><h:inputText id="name" value="#{sessionBean.loginName}" /></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><h:inputSecret id="password" value="#{sessionBean.loginPassword}" /></td>
-                </tr>
-            </table>
-            <h:commandButton value="Login" action="#{sessionBean.login()}" />
-            <h:commandButton value="Opret ny bruger" action="#{sessionBean.createUser()}" />
-        </h:form>
+		<h2>Categories:</h2>
+		<h:form>
+			<ui:repeat value="#{applicationBean.categories}" var="cat">
+				<p>
+					<h:commandLink action="#{sessionBean.selectCategory(cat)}">
+						#{cat.topic}
+					</h:commandLink>
+				</p>
+			</ui:repeat>
+		</h:form>
+		
     </h:body>
 </html>
 
