@@ -14,6 +14,7 @@
 					<h:commandLink action="#{sessionBean.selectCategory(cat)}">
 						#{cat.topic}
 					</h:commandLink>
+					(#{cat.numThreads} threads)
 				</p>
 			</ui:repeat>
 		</h:form>

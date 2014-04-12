@@ -61,15 +61,15 @@ public class ApplicationBean {
 		users.put(name, u);
 		return u;
 	}
-	public PostThread createThread(String topic, Category category, User owner) {
-		PostThread pt = new PostThread(topic, category, nextThreadId);
+	public PostThread createThread(String topic, String text, Category category, User owner) {
+		PostThread pt = category.createPostThread(topic, category, nextThreadId);
 		nextThreadId++;
 		threads.add(pt);
-		category.addPostThread(pt);
+		createPost(pt, text, owner);
 		return pt;
 	}
 	public Post createPost(PostThread thread, String text, User owner) {
-		Post p = new Post(text, new Date(), owner, nextPostId);
+		Post p = thread.createPost(text, new Date(), owner, nextPostId);
 		nextPostId++;
 		posts.add(p);
 		return p;

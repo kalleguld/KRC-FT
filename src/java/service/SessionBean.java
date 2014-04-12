@@ -22,7 +22,7 @@ import model.User;
 @SessionScoped
 public class SessionBean implements Serializable {
     @Inject
-    private ApplicationBean application;
+    private ApplicationBean app;
 
     //Bruges til at hente informationer omkring der hvor man er nu
     private String currentTopic;    
@@ -131,14 +131,14 @@ public class SessionBean implements Serializable {
     }
 
 	public void setApplication(ApplicationBean application) {
-		this.application = application;
+		this.app = application;
 	}
 	
 
     //---------------------------------------------------------------------
     //Rigtige metoder
     public void createUser() {
-        application.createUser(this.loginName, this.loginPassword);
+        app.createUser(this.loginName, this.loginPassword);
     }
 
     public void deleteUser() {
@@ -155,7 +155,7 @@ public class SessionBean implements Serializable {
     }
 
     public String login() {
-        User validUser = application.getUserByName(this.loginName);
+        User validUser = app.getUserByName(this.loginName);
         if (validUser.doesPasswordMatch(loginPassword)) {
             currentUser = validUser;
 			this.loginPassword = null;
@@ -174,11 +174,12 @@ public class SessionBean implements Serializable {
     public String createThread() {
         String out = null;
 		if(currentUser != null) {
-			PostThread pt = application.createThread(this.threadTopic, 
-									this.currentCategory, 
-									this.currentUser);
+			PostThread pt = app.createThread(this.threadTopic,
+							this.currentText,
+							this.currentCategory, 
+							this.currentUser);
 			this.currentThread = pt;
-			application.createPost(pt, this.currentText, currentUser);
+			app.createPost(pt, this.currentText, currentUser);
 			out = "viewPosts";
 		}
 		return out;
@@ -190,7 +191,7 @@ public class SessionBean implements Serializable {
 
     public String createCategory(){
         if(currentUser != null) {
-			application.createCategory(this.currentUser, this.threadTopic);
+			app.createCategory(this.currentUser, this.threadTopic);
 		}
 		return "index";
     }
@@ -202,7 +203,7 @@ public class SessionBean implements Serializable {
     public String createPost() {
 		String out = "login";
         if(currentUser != null) {
-	        application.createPost(currentThread, postText, currentUser);
+	        app.createPost(currentThread, postText, currentUser);
 			out = null;
 		}
 		return out;
@@ -235,35 +236,60 @@ public class SessionBean implements Serializable {
     // Lav en side som viser alle brugere i systemet.
     public String creatAndStoreSomeObjects() {
 		
-        User user1 = application.createUser("Lars", "1234");
-        User user2 = application.createUser("Hans", "qwerty");
-        User user3 = application.createUser("Bo", "5678");
-        User user4 = application.createUser("Kim", "123456");
-        User user5 = application.createUser("Helle", "password");
-        User user6 = application.createUser("Line", "password1");
-        User user7 = application.createUser("Louise", "nej");
-        User user8 = application.createUser("Sine", "måske");
-        
-        Category cat1 = application.createCategory(user1, "How to clean a toilet");
-        Category cat2 = application.createCategory(user1, "How to sit on a toilet");
-        Category cat3 = application.createCategory(user1, "How to spell to toilet");
-        Category cat4 = application.createCategory(user1, "Is JSF shit?");
-        Category cat5 = application.createCategory(user1, "What time is it?");
-        
-        PostThread pt1 = application.createThread("I know i know!", cat5, user1);
-        PostThread pt2 = application.createThread("If think its safe to say so", cat4, user2);
-        PostThread pt3 = application.createThread("I think you just did", cat3, user1);
-        PostThread pt4 = application.createThread("I've been wondering the same thing", cat2, user3);
-        PostThread pt5 = application.createThread("Shhh", cat1, user4);
-        PostThread pt6 = application.createThread("It's irrellevant", cat5, user4);
-        
-        Post p1 = application.createPost(pt1, "Hello world", user1);
-        Post p2 = application.createPost(pt2, "What?", user2);
-        Post p3 = application.createPost(pt3, "????", user3);
-        Post p4 = application.createPost(pt4, "Glasses", user4);
-        Post p5 = application.createPost(pt5, "Damn you all", user5);
-        Post p6 = application.createPost(pt6, "I like baloons", user6);
-        Post p7 = application.createPost(pt1, "I got hair in my mouth", user7);
+        User user1 = app.createUser("Lars", "1234");
+        User user2 = app.createUser("Hans", "qwerty");
+        User user3 = app.createUser("Bo", "5678");
+        User user4 = app.createUser("Kim", "123456");
+        User user5 = app.createUser("Helle", "password");
+        User user6 = app.createUser("Line", "password1");
+        User user7 = app.createUser("Louise", "nej");
+        User user8 = app.createUser("Sine", "måske");
+		
+		Category toilets = app.createCategory(user1, 
+				"Toilets and toilet-related technologies");
+		
+		PostThread pt11 = app.createThread("How to clean a toilet?", 
+				"Does anyone have any good tips for cleaning a toilets? Mine is really quite dirty!", 
+				toilets, 
+				user7);
+		Post p111 = app.createPost(pt11, 
+				"Wait until you have to pee really, really bad, then use the stream to remove any dirt", 
+				user8);
+		Post p112 =app.createPost(pt11, "Thx, it worked!", user7);
+		
+		PostThread pt12 = app.createThread("How to sit on a toilet?", 
+				"I keep falling off! \nRight now I just lie besides the toilet and do my business, but I feel like it could be done in a better way", 
+				toilets, 
+				user2);
+		Post p121 = app.createPost(pt12, "I think I know", user3);
+		Post p122 = app.createPost(pt12, "This clearly belongs in the Obvious-category", 
+				user8);
+		Post p123 = app.createPost(pt12, "No Way!, it's totally about toilet tech. My dad designed the toilet on the ISS, they have the same problem up there", 
+				user5);
+
+		PostThread pt13 = app.createThread("How to spell to toilet", 
+				"Someone help me pls", 
+				toilets, 
+				user3);
+		
+		Category obvious = app.createCategory(user3, 
+				"Questions with obvious answers");
+
+		PostThread pt21 = app.createThread("Is JSF shit", "I need to know", 
+				obvious, user8);
+		
+		
+		PostThread pt22 = app.createThread("What time is it?", "pls??", 
+				obvious, user1);
+		
+		
+        Post p1 = app.createPost(pt11, "Hello world", user1);
+        Post p2 = app.createPost(pt21, "What?", user2);
+        Post p3 = app.createPost(pt11, "????", user3);
+        Post p4 = app.createPost(pt12, "Glasses", user4);
+        Post p5 = app.createPost(pt11, "Damn you all", user5);
+        Post p6 = app.createPost(pt22, "I like baloons", user6);
+        Post p7 = app.createPost(pt11, "I got hair in my mouth", user7);
 		
 		
 		return "index";

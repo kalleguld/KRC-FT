@@ -11,11 +11,20 @@
 		<h2>#{sessionBean.currentCategory.topic} (#{sessionBean.currentCategory.numThreads} threads)</h2>
         <h:form>
 			<ui:repeat value="#{sessionBean.currentCategory.threads}" var="thr">
-				<p>
-					<h:commandLink action="#{sessionBean.selectThread(thr)}">
-						#{thr.topic}
-					</h:commandLink>
-				</p>
+				<div class="thread-item">
+					<div class="thread-link">
+						<h:commandLink action="#{sessionBean.selectThread(thr)}">
+							#{thr.topic}
+						</h:commandLink>
+					</div>
+					<div class="thread-info">
+						<div class="thread-info-post-num">(#{thr.postCount} posts)</div>
+						<div class="thread-info-author">Author: #{thr.firstPost.user.username}</div>
+						<div class="thread-info-firstDate">Created: #{thr.firstPost.date}</div>
+						<div class="thread-info-lastdate">Last post: #{thr.lastPost.date}</div>
+					</div>
+					
+				</div>
 			</ui:repeat>
 		</h:form>
     </h:body>

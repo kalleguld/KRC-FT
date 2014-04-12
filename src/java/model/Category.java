@@ -68,11 +68,6 @@ public class Category {
         return postThread;
     }
 
-    public void addPostThread(PostThread postThread) {
-        if (!postThreads.contains(postThread)) {
-            postThreads.add(postThread);
-        }
-    }
 
     public void deletePostThread(PostThread postThread) {
         if (postThreads.contains(postThread)) {

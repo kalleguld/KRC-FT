@@ -7,6 +7,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -16,10 +17,10 @@ public class PostThread {
 
     private String topic;
     private Category category;
-    private ArrayList<Post> posts = new ArrayList<Post>();
+    private List<Post> posts = new ArrayList<Post>();
 	private final int id;
 
-    public PostThread(String topic, Category category, int id) {
+    PostThread(String topic, Category category, int id) {
         this.topic = topic;
         this.category = category;
 		this.id = id;
@@ -35,10 +36,10 @@ public class PostThread {
         this.topic = topic;
     }
 
-    public void createPost(String text, Date date, User user, int id) {
+    public Post createPost(String text, Date date, User user, int id) {
         Post post = new Post(text, date, user, id);
         posts.add(post);
-        //return post;
+        return post;
     }
 
     public void deletePost(Post post) {
@@ -50,4 +51,16 @@ public class PostThread {
     public int getPostCount() {
         return posts.size();
     }
+	
+	public List<Post> getPosts() {
+		return new ArrayList<>(posts);
+	}
+	
+	public Post getFirstPost() {
+		return posts.get(0);
+	}
+	
+	public Post getLastPost() {
+		return posts.get(posts.size()-1);
+	}
 }
