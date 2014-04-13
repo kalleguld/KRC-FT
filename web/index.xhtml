@@ -5,17 +5,22 @@
 	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Categories</title>
+		<link rel="StyleSheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
 		<h2>Categories:</h2>
 		<h:form>
 			<ui:repeat value="#{applicationBean.categories}" var="cat">
-				<p>
-					<h:commandLink action="#{sessionBean.selectCategory(cat)}">
-						#{cat.topic}
-					</h:commandLink>
-					(#{cat.numThreads} threads)
-				</p>
+				<div class="category">
+					<div class="loop-link">
+						<h:commandLink action="#{sessionBean.selectCategory(cat)}">
+							#{cat.topic}
+						</h:commandLink>
+					</div>
+					<div class="info">
+						(#{cat.numThreads} threads)
+					</div>
+				</div>
 			</ui:repeat>
 		</h:form>
 		

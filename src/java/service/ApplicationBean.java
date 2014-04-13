@@ -4,6 +4,7 @@ package service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,9 +27,9 @@ import model.User;
 public class ApplicationBean {
 
 	private final Map<String, User> users;
-	private final Collection<Category> categories;
-	private final Collection<PostThread> threads;
-	private final Collection<Post> posts;
+	private final List<Category> categories;
+	private final List<PostThread> threads;
+	private final List<Post> posts;
 	private int nextCategoryId = 0;
 	private int nextThreadId = 0;
 	private int nextPostId = 0;
@@ -36,9 +37,9 @@ public class ApplicationBean {
 	public ApplicationBean() {
 		
 		users = new HashMap<>();
-		categories = new HashSet<>();
-		threads = new HashSet<>();
-		posts = new HashSet<>();
+		categories = new ArrayList<>();
+		threads = new ArrayList<>();
+		posts = new ArrayList<>();
 	}
 	
 	public User getUserByName(String name) {
@@ -87,15 +88,15 @@ public class ApplicationBean {
 	}
 
 	public List<Category> getCategories() {
-		return new ArrayList<>(categories);
+		return Collections.unmodifiableList(categories);
 	}
 
 	public List<PostThread> getThreads() {
-		return new ArrayList<>(threads);
+		return Collections.unmodifiableList(threads);
 	}
 
 	public List<Post> getPosts() {
-		return new ArrayList<>(posts);
+		return Collections.unmodifiableList(posts);
 	}
 	
 	
