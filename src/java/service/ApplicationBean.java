@@ -75,6 +75,9 @@ public class ApplicationBean {
 	 */
 	public PostThread createThread(String topic, String text, 
 							Category category, User owner) {
+		if (!owner.canCreateThreads(category)) {
+			return null;
+		}
 		PostThread pt = category.createPostThread(topic, category, nextThreadId);
 		threads.put(nextThreadId, pt);
 		nextThreadId++;
@@ -91,6 +94,9 @@ public class ApplicationBean {
 	 * reply to the thread
 	 */
 	public Post createPost(PostThread thread, String text, User owner) {
+		if (!owner.canCreatePosts(thread)) {
+			return null;
+		}
 		Post p = thread.createPost(text, new Date(), owner, nextPostId);
 		posts.put(nextPostId, p);
 		nextPostId++;
@@ -105,6 +111,9 @@ public class ApplicationBean {
 	 * categories.
 	 */
 	public Category createCategory(User owner, String topic) {
+		if (!owner.canCreateCategories()) {
+			return null;
+		}
 		Category c = new Category(topic, nextCategoryId);
 		categories.put(nextCategoryId, c);
 		nextCategoryId++;

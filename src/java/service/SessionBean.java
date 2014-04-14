@@ -273,7 +273,7 @@ public class SessionBean implements Serializable {
 				toilets, 
 				user3);
 		
-		Category obvious = app.createCategory(user3, 
+		Category obvious = app.createCategory(user1, 
 				"Questions with obvious answers");
 
 		PostThread pt21 = app.createThread("Is JSF shit", "I need to know", 
