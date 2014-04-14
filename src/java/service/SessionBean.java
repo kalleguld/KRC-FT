@@ -141,11 +141,11 @@ public class SessionBean implements Serializable {
         app.createUser(this.loginName, this.loginPassword);
     }
 
-    public void deleteUser() {
-		//TODO 
-//        if (currentUser.isAdmin()) {
-//            application.removeUser(selectedUser);
-//        }
+    public String deleteUser(User us) {
+        if (currentUser.isAdmin() && !us.equals(currentUser)) {
+            app.removeUser(us);
+        }
+        return "users";
     }
 
     public void deleteSelf() {
@@ -231,7 +231,7 @@ public class SessionBean implements Serializable {
 		currentThread = pt;
 		return "viewPosts";
 	}
-    
+            
     // Lav en side der hedder newPost som viser alle posts i en thread
     // Lav en side som viser alle brugere i systemet.
     public String creatAndStoreSomeObjects() {

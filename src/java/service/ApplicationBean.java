@@ -61,6 +61,11 @@ public class ApplicationBean {
 		users.put(name, u);
 		return u;
 	}
+        
+        public void removeUser(User u) {
+            users.remove(u.getUsername());
+	}
+        
 	public PostThread createThread(String topic, String text, Category category, User owner) {
 		PostThread pt = category.createPostThread(topic, category, nextThreadId);
 		nextThreadId++;
