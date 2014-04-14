@@ -155,15 +155,17 @@ public class SessionBean implements Serializable {
     }
 
     public String login() {
-        User validUser = app.getUserByName(this.loginName);
-        if (validUser.doesPasswordMatch(loginPassword)) {
-            currentUser = validUser;
-			this.loginPassword = null;
-            return "index";
-        } else {
-            currentUser = null;
-            return null;
-        }
+        currentUser = null;
+        String navRule = null;
+		User validUser = app.getUserByName(this.loginName);
+		if (validUser != null) {
+			if (validUser.doesPasswordMatch(loginPassword)) {
+				currentUser = validUser;
+				this.loginPassword = null;
+				navRule = "index";
+			}
+		}
+		return navRule;
     }
     
     public String logout() {
