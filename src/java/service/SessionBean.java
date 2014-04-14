@@ -237,6 +237,7 @@ public class SessionBean implements Serializable {
     public String creatAndStoreSomeObjects() {
 		
         User user1 = app.createUser("Lars", "1234");
+		user1.setAdmin(true);
         User user2 = app.createUser("Hans", "qwerty");
         User user3 = app.createUser("Bo", "5678");
         User user4 = app.createUser("Kim", "123456");

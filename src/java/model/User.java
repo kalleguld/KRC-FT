@@ -100,9 +100,6 @@ public class User {
 
     public boolean doesPasswordMatch(String pw) {
         if (this.password != null) {
-            if (this.password.equals("1234")) {
-                admin = true;
-            }
             return this.password.equals(pw);
         }
         return false;
