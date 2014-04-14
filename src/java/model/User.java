@@ -152,4 +152,8 @@ public class User {
 		//TODO figure out logic
 		return true;
 	}
+	
+	public boolean canManageUsers() {
+		return admin;
+	}
 }
