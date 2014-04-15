@@ -49,19 +49,40 @@ public class ApplicationBean {
 		threads = new HashMap<>();
 		posts = new HashMap<>();
 	}
-	
-	public User getUserByName(String name) {
-		return users.get(name);
-	}
 
+	/**
+	 * Creates a new user, assuming the username isn't already taken.
+	 * @param name the username of the new user
+	 * @param password the password of the new user. The password is assumed to 
+	 * have been checked for typing errors.
+	 * @return The new user, or null if the username was already taken.
+	 */
 	public User createUser(String name, String password) {
+		if (users.containsKey(name)) {
+			return null;
+		}
 		User u = new User(name, password);
 		users.put(name, u);
 		return u;
+		
 	}
-        
-	public void removeUser(User u) {
-		users.remove(u.getUsername());
+	
+	/**
+	 * Creates a new category
+	 * @param owner The user who creates the category
+	 * @param topic The name of the category
+	 * @return The new category, or null if owner isn't allowed to create
+	 * categories.
+	 */
+	public Category createCategory(User owner, String topic) {
+		if (!owner.canCreateCategories()) {
+			return null;
+		}
+		Category c = new Category(topic, nextCategoryId);
+		categories.put(nextCategoryId, c);
+		nextCategoryId++;
+		c.addModerator(owner);
+		return c;
 	}
         
 	/**
@@ -103,23 +124,6 @@ public class ApplicationBean {
 		return p;
 	}
 	
-	/**
-	 * Creates a new category
-	 * @param owner The user who creates the category
-	 * @param topic The name of the category
-	 * @return The new category, or null if owner isn't allowed to create
-	 * categories.
-	 */
-	public Category createCategory(User owner, String topic) {
-		if (!owner.canCreateCategories()) {
-			return null;
-		}
-		Category c = new Category(topic, nextCategoryId);
-		categories.put(nextCategoryId, c);
-		nextCategoryId++;
-		c.addModerator(owner);
-		return c;
-	}
 
 	public List<User> getUsers() {
 		return new ArrayList<>(users.values());
@@ -137,4 +141,56 @@ public class ApplicationBean {
 		return new ArrayList<>(posts.values());
 	}
 	
+	/**
+	 * Returns the user with the given username, or null if no such user exists.
+	 * @param username the username of the user to get.
+	 * @return the user with the given username, or null if no such user exists.
+	 */
+	public User getUserByName(String username) {
+		return users.get(username);
+	}
+	
+	/**
+	 * Returns the category with the given ID, or null if no such category exists.
+	 * @param catId the ID of the category
+	 * @return the category with the given ID, or null if no such category exists.
+	 */
+	public Category getCategoryById(int catId) {
+		return categories.get(catId);
+	}
+	
+	/**
+	 * Returns the thread with the given ID, or null if no such thread exists.
+	 * @param threadId the ID of the thread.
+	 * @return the thread with the given ID, or null if no such thread exists.
+	 */
+	public PostThread getThreadById(int threadId) {
+		return threads.get(threadId);
+	}
+	
+	/**
+	 * Returns the post with the given ID, or null if no such post exists.
+	 * @param postId the ID of the post.
+	 * @return the post with the given ID, or null if no such post exists.
+	 */
+	public Post getPostById(int postId) {
+		return posts.get(postId);
+	}
+	    
+	
+	public void removeUser(User u) {
+		users.remove(u.getUsername());
+	}
+	
+	public void removeCategory(Category cat) {
+		categories.remove(cat.getId());
+	}
+	
+	public void removeThread(PostThread pt) {
+		threads.remove(pt.getId());
+	}
+	
+	public void removePost(Post p) {
+		posts.remove(p.getId());
+	}
 }

@@ -36,6 +36,10 @@ public class PostThread {
         this.topic = topic;
     }
 
+	public int getId() {
+		return id;
+	}
+
     public Post createPost(String text, Date date, User user, int id) {
         Post post = new Post(text, date, user, id);
         posts.add(post);

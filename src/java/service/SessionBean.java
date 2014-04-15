@@ -142,7 +142,10 @@ public class SessionBean implements Serializable {
     }
 
     public String deleteUser(User us) {
-        if (currentUser.isAdmin() && !us.equals(currentUser)) {
+        //TODO move all posts and threads to a dummy user
+		//TODO remove user as moderator in all categories
+		//TODO Advanced log the user out of all active sessions
+		if (currentUser.isAdmin() && !us.equals(currentUser)) {
             app.removeUser(us);
         }
         return "users";
@@ -156,16 +159,16 @@ public class SessionBean implements Serializable {
 
     public String login() {
         currentUser = null;
-        String navRule = null;
-		User validUser = app.getUserByName(this.loginName);
-		if (validUser != null) {
-			if (validUser.doesPasswordMatch(loginPassword)) {
-				currentUser = validUser;
+        String navOutcome = null;
+		User requestedUser = app.getUserByName(this.loginName);
+		if (requestedUser != null) {
+			if (requestedUser.doesPasswordMatch(loginPassword)) {
+				currentUser = requestedUser;
 				this.loginPassword = null;
-				navRule = "index";
+				navOutcome = "index";
 			}
 		}
-		return navRule;
+		return navOutcome;
     }
     
     public String logout() {
