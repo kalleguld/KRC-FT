@@ -16,18 +16,27 @@ import java.util.List;
 public class PostThread {
 
     private String topic;
+    private User creator;
     private Category category;
     private List<Post> posts = new ArrayList<Post>();
 	private final int id;
 
-    PostThread(String topic, Category category, int id) {
+    PostThread(String topic, Category category, int id, User creator) {
         this.topic = topic;
         this.category = category;
 		this.id = id;
         this.posts = posts = new ArrayList<>();
+        this.creator = creator;
     }
 
-	
+    public Category getCategory() {
+        return category;
+    }
+    
+    public User getCreator() {
+        return creator;
+    }
+
     public String getTopic() {
         return topic;
     }
@@ -41,7 +50,7 @@ public class PostThread {
 	}
 
     public Post createPost(String text, Date date, User user, int id) {
-        Post post = new Post(text, date, user, id);
+        Post post = new Post(text, date, user, id, this);
         posts.add(post);
         return post;
     }

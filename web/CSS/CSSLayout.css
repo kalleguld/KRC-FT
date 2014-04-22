@@ -14,7 +14,6 @@ body {
 #createThread {
     position: static;
     float: right;
-    margin-top: -12%;
 }
 header {
     position: relative;
@@ -55,7 +54,6 @@ h:active {
     color:black;
     text-decoration:underline;
     background-color: antiquewhite;
-=======
 }
 
 #createPost {
@@ -73,5 +71,4 @@ h:active {
     height: 150px;
     text-align: left;
     line-height: -4px
->>>>>>> refs/remotes/origin/master
 }

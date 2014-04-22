@@ -62,8 +62,8 @@ public class Category {
 		return id;
 	}
 
-    public PostThread createPostThread(String topic, Category category, int id) {
-        PostThread postThread = new PostThread(topic, category, id);
+    public PostThread createPostThread(String topic, Category category, int id, User creator) {
+        PostThread postThread = new PostThread(topic, category, id, creator);
         postThreads.add(postThread);
         return postThread;
     }

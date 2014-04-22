@@ -99,7 +99,7 @@ public class ApplicationBean {
 		if (!owner.canCreateThreads(category)) {
 			return null;
 		}
-		PostThread pt = category.createPostThread(topic, category, nextThreadId);
+		PostThread pt = category.createPostThread(topic, category, nextThreadId, owner);
 		threads.put(nextThreadId, pt);
 		nextThreadId++;
 		createPost(pt, text, owner);
@@ -176,8 +176,7 @@ public class ApplicationBean {
 	public Post getPostById(int postId) {
 		return posts.get(postId);
 	}
-	    
-	
+       
 	public void removeUser(User u) {
 		users.remove(u.getUsername());
 	}
@@ -188,9 +187,11 @@ public class ApplicationBean {
 	
 	public void removeThread(PostThread pt) {
 		threads.remove(pt.getId());
+                pt.getCategory().deletePostThread(pt);
 	}
 	
 	public void removePost(Post p) {
 		posts.remove(p.getId());
+                p.getPostthread().deletePost(p);
 	}
 }
