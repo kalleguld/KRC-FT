@@ -40,6 +40,7 @@ public class SessionBean implements Serializable {
     //Bruges til at login og out samt oprette nye Users
     private String loginName;
     private String loginPassword;
+	private String loginPassRepeat;
     //Bruges til at slette en bestemt bruger
     private User selectedUser;
     
@@ -128,6 +129,15 @@ public class SessionBean implements Serializable {
         return currentText;
     }
 
+	public String getLoginPassRepeat() {
+		return loginPassRepeat;
+	}
+
+	public void setLoginPassRepeat(String loginPassRepeat) {
+		this.loginPassRepeat = loginPassRepeat;
+	}
+
+	
     public void setCurrentText(String currentText) {
         this.currentText = currentText;
     }
