@@ -2,31 +2,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>#{sessionBean.currentCategory.topic}</title>
         <link rel="stylesheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
-		<h2> #{sessionBean.currentCategory.topic}</h2>
+        <h2> #{sessionBean.currentCategory.topic}</h2>
+        <h:form id="createThread">
+            <h3>Make your thread</h3>
+            <table>
+                <tr>
+                    <td>Thread Title:</td>
+                    <td><h:inputText id="threadTopic" value="#{sessionBean.threadTopic}" /></td>
+                </tr>
+                <tr>
+                    <td>First post:</td>
+                    <td><h:inputText id="currentText" value="#{sessionBean.currentText}" /></td>
+                </tr>
+            </table>
+            <h:commandButton value="Opret thread" action="#{sessionBean.createThread()}" />        
+        </h:form>
         <h:form>
-			<ui:repeat value="#{sessionBean.currentCategory.threads}" var="thr">
-				<div class="thread">
-					<div class="loop-link">
-						<h:commandLink action="#{sessionBean.selectThread(thr)}">
-							#{thr.topic}
-						</h:commandLink>
-					</div>
-					<div class="info">
-						<div class="post-num">(#{thr.postCount} posts)</div>
-						<div class="-author">Author: #{thr.firstPost.user.username}</div>
-						<div class="first-date date">Created: #{thr.firstPost.date}</div>
-						<div class="last-date date">Last post: #{thr.lastPost.date}</div>
-					</div>
-					
-				</div>
-			</ui:repeat>
-		</h:form>
+            <ui:repeat value="#{sessionBean.currentCategory.threads}" var="thr">
+                <div class="thread">
+                    <div class="loop-link">
+                        <h:commandLink action="#{sessionBean.selectThread(thr)}">
+                            #{thr.topic}
+                        </h:commandLink>
+                    </div>
+                    <div class="info">
+                        <div class="post-num">(#{thr.postCount} posts)</div>
+                        <div class="-author">Author: #{thr.firstPost.user.username}</div>
+                        <div class="first-date date">Created: #{thr.firstPost.date}</div>
+                        <div class="last-date date">Last post: #{thr.lastPost.date}</div>
+                    </div>
+
+                </div>
+            </ui:repeat>
+        </h:form>
     </h:body>
 </html>
 

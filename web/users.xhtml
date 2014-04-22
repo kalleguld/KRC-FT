@@ -1,13 +1,40 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-		Hello from Facelets
-		<!-- TODO -->
-    </h:body>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <head>
+        <title>Users</title>
+        <!--        <link rel="stylesheet" href="CSSLayout.css"/>-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    </head>
+    <body>
+        <h:form>
+            <div data-role="page" id="page">
+                <div data-role="header">
+                    <h1>Users</h1>
+                </div>
+                <ui:repeat value="#{applicationBean.users}" var="user">
+
+                    <div data-role="content">
+                        <ul data-role="listview">
+                            <li>
+                                <h:commandLink  action="#{sessionBean.selectUser(user)}">
+                                    #{user.username}
+                                </h:commandLink>
+                                <h:commandButton rendered="#{sessionBean.currentUser.admin}" value="slet" action="#{sessionBean.deleteUser(user)}" type="submit" />
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </ui:repeat>
+                <div data-role="footer">
+                    <h4> Footer </h4>
+                </div>
+            </div>
+        </h:form>
+    </body>
 </html>
 
