@@ -8,7 +8,7 @@
 		<link rel="StyleSheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
-		<h2>#{sessionBean.currentThread.topic}</h2>
+		<h2>#{sessionBean.currentThread.topic}</h2>                
 		<ui:repeat value="#{sessionBean.currentThread.posts}" var="post">
 			<div class="post">
 				<div class="content">
@@ -24,6 +24,24 @@
 				</div>
 			</div>
 		</ui:repeat>
+                
+                <h:form>
+                <div class="createPost">
+                    <h3>
+                        Write your Comment
+                    </h3>
+                    <div>
+                        Comment:
+                    </div>
+                    <div class="create-post-text">  
+                        <h:inputTextarea id="currentText" class="create-post-text" value="#{sessionBean.postText}"/>
+                    </div>
+                    <div>
+                        <h:commandButton value="Create post" action="#{sessionBean.createPost()}" />
+                    </div>
+                    
+                </div>
+                </h:form>
     </h:body>
 </html>
 
