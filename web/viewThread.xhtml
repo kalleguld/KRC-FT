@@ -43,8 +43,8 @@
                     <div>
                         Comment:
                     </div>
-                    <div class="create-post-text">  
-                        <h:inputTextarea id="currentText" class="create-post-text" value="#{sessionBean.postText}"/>
+                    <div>  
+                        <h:inputTextarea id="currentText" rows="5" value="#{sessionBean.postText}"/>
                     </div>
                     <div>
                         <h:commandButton value="Create post" action="#{sessionBean.createPost()}" />
