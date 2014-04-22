@@ -18,7 +18,7 @@
                 </tr>
                 <tr>
                     <td>First post:</td>
-                    <td><h:inputText id="currentText" value="#{sessionBean.currentText}" /></td>
+                    <td><h:inputTextarea rows="5" id="currentText" value="#{sessionBean.currentText}" /></td>
                 </tr>
             </table>
             <h:commandButton value="Opret thread" action="#{sessionBean.createThread()}" />        
