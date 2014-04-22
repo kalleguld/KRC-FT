@@ -5,8 +5,10 @@
  */
 package service;
 
+import java.io.IOException;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import model.Category;
@@ -157,6 +159,12 @@ public class SessionBean implements Serializable {
 //        application.removeUser(currentUser);
     }
 
+     //Sørger for at det kun er dem der er login som kan lave nye categorier.
+    public void ifLogin() throws IOException {
+        if (currentUser == null)
+            FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");    
+    }
+    
     public String login() {
         currentUser = null;
         String navOutcome = null;
