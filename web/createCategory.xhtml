@@ -12,6 +12,14 @@
         </f:metadata>
     </head>
     <body>
+        <header>
+            <h:form id="nav"> 
+                <ul>
+                    <li><h:commandLink value="Home" action="index.xhtml"/></li>
+                </ul>
+            </h:form>
+        </header>
+
         <h3>Skriv titlen på din categori</h3>
         <h:form>
             <h:inputText id="category" value="#{sessionBean.threadTopic}"/>

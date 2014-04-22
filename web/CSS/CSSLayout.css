@@ -2,20 +2,76 @@ F/*
     Created on : 08-04-2014, 09:24:40
     Author     : Randi
 */
-table, tr, td, h3, form {
+#loginform {
     text-align:center;
-    margin-top: 200px;
+    margin-top: 200px;   
 }
 
 body {
     background-image: url("image/flower-wallpaper.png");
 }
 
-table {
-    margin: auto;
-}
 #createThread {
     position: static;
     float: right;
     margin-top: -12%;
+}
+header {
+    position: relative;
+    height: 157px;
+    background: white;
+    text-align: center;
+    vertical-align: baseline;
+}
+#nav {
+    float: left;
+    line-height: normal;
+    position: relative;
+    margin-top: 20px;
+}
+#nav ul{
+    list-style-type: none;
+    position: relative;
+}
+#nav ul li {
+    display: inline;
+    padding: 15px;
+    font-family: Futura, Tahoma, sans-serif;
+}
+h:link {
+    color:#black;
+    text-decoration:none;
+    background-color: whitesmoke
+}/* unvisited link */
+h:visited {
+    color:black;
+    text-decoration:none;
+}  /* visited link */
+h:hover {
+    color:black;
+    text-decoration:underline;
+}  /* mouse over link */
+h:active {
+    color:black;
+    text-decoration:underline;
+    background-color: antiquewhite;
+=======
+}
+
+#createPost {
+    position: static;
+    float: left;
+}
+
+#create-post-text {
+    width: 100px;
+    height: 200px;
+}
+
+#currentText {
+    width: 250px;
+    height: 150px;
+    text-align: left;
+    line-height: -4px
+>>>>>>> refs/remotes/origin/master
 }

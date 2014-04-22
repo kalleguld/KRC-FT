@@ -202,7 +202,6 @@ public class SessionBean implements Serializable {
 							this.currentCategory, 
 							this.currentUser);
 			this.currentThread = pt;
-			app.createPost(pt, this.currentText, currentUser);
 			out = "viewPosts";
 		}
 		return out;
@@ -224,12 +223,14 @@ public class SessionBean implements Serializable {
     }
     
     public String createPost() {
-		String out = "login";
+	String out = "login";
         if(currentUser != null) {
+            
 	        app.createPost(currentThread, postText, currentUser);
-			out = null;
-		}
-		return out;
+		out = null;
+                postText = null;
+	}
+	return out;
     }
 
     public void deletePost() {

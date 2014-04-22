@@ -8,6 +8,14 @@
         <link rel="stylesheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
+        <header>
+            <h:form id="nav"> 
+                <ul>
+                    <li><h:commandLink value="Home" action="index.xhtml"/></li>
+                </ul>
+            </h:form>
+        </header>
+
         <h2> #{sessionBean.currentCategory.topic}</h2>
         <h:form id="createThread">
             <h3>Make your thread</h3>
@@ -18,7 +26,7 @@
                 </tr>
                 <tr>
                     <td>First post:</td>
-                    <td><h:inputText id="currentText" value="#{sessionBean.currentText}" /></td>
+                    <td><h:inputTextarea rows="5" id="currentText" value="#{sessionBean.currentText}" /></td>
                 </tr>
             </table>
             <h:commandButton value="Opret thread" action="#{sessionBean.createThread()}" />        
