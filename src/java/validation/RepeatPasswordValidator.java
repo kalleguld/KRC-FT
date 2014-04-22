@@ -37,9 +37,6 @@ public class RepeatPasswordValidator implements Validator {
 		String pass1 = ((HtmlInputSecret)component.findComponent("pass1")).getValue().toString();
 		String pass2 = value.toString();
 		
-		System.out.println("rPWVal pass1: " + pass1);
-		System.out.println("rPWVal pass2: " + pass2);
-		
 		if (!pass1.equals(pass2)) {
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR,
