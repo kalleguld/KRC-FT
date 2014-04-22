@@ -6,11 +6,19 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <head>
         <title>Users</title>
-        <!--        <link rel="stylesheet" href="CSSLayout.css"/>-->
+                <link rel="stylesheet" href="CSSLayout.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     </head>
     <body>
+        <header>
+            <h:form id="nav"> 
+                <ul>
+                    <li><h:commandLink value="Home" action="index.xhtml"/></li>
+                </ul>
+            </h:form>
+        </header>
+
         <h:form>
             <div data-role="page" id="page">
                 <div data-role="header">
@@ -25,7 +33,7 @@
                                     #{user.username}
                                 </h:commandLink>
                                 <h:commandButton rendered="#{sessionBean.currentUser.admin}" value="slet" action="#{sessionBean.deleteUser(user)}" type="submit" />
-                                
+
                             </li>
                         </ul>
                     </div>

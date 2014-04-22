@@ -8,6 +8,15 @@
 		<link rel="StyleSheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
+        <header>
+            <h:form id="nav"> 
+                <ul>
+                    <li><h:commandLink value="Home" action="index.xhtml"/></li>
+                    <li><h:commandLink value="#{sessionBean.currentCategory.topic}" action="viewCategory.xhtml"/></li>
+                </ul>
+            </h:form>
+        </header>
+
 		<h2>#{sessionBean.currentThread.topic}</h2>
 		<ui:repeat value="#{sessionBean.currentThread.posts}" var="post">
 			<div class="post">
