@@ -8,7 +8,7 @@ F/*
 }
 
 body {
-    background-image: url("image/flower-wallpaper.png");
+    background-image: url("../image/flower-wallpaper.png");
 }
 
 #createThread {
@@ -67,4 +67,14 @@ h:active {
     height: 150px;
     text-align: left;
     line-height: -4px
+}
+
+.category, .thread, .post {
+	border: solid black;
+	border-width: 1px;
+}
+
+.info {
+	color: darkgray;
+	font-size: smaller;
 }
