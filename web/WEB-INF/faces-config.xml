@@ -21,4 +21,14 @@
 			<to-view-id>/viewThread.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<application>
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>da</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>properties.msgs</base-name>
+			<var>msgs</var>
+		</resource-bundle>
+	</application>
 </faces-config>

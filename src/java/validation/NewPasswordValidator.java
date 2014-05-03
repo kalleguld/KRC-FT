@@ -6,6 +6,7 @@
 
 package validation;
 
+import java.util.ResourceBundle;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -36,12 +37,14 @@ public class NewPasswordValidator implements Validator {
 		
 		String proposedPassword = value.toString();
 		
-		
 		if (proposedPassword.length() < 4) {
+			
+			ResourceBundle msgs = ResourceBundle.getBundle("properties.msgs", 
+						context.getViewRoot().getLocale());
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR,
-					"Password is too weak",
-					"Password is too weak. Please use at least 4 characters");
+					msgs.getString("opretLogin_error_passwordTooShortHeader"),
+					msgs.getString("opretLogin_error_passwordTooShort"));
 			throw new ValidatorException(message);
 		}
 	}

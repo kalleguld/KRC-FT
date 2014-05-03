@@ -2,34 +2,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>#{sessionBean.currentCategory.topic}</title>
+        <title>
+			<h:outputFormat value="#{msgs.viewCat_title}">
+				<f:param value="#{sessionBean.currentCategory.topic}"/>
+			</h:outputFormat>
+			
+		</title>
         <link rel="stylesheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
         <header>
             <h:form id="nav"> 
                 <ul>
-                    <li><h:commandLink value="Home" action="index.xhtml"/></li>
+                    <li>
+						<h:commandLink value="#{msgs.common_link_index}" 
+									   action="index.xhtml"/>
+					</li>
                 </ul>
             </h:form>
         </header>
 
-        <h2> #{sessionBean.currentCategory.topic}</h2>
+        <h2>
+			<h:outputFormat value="#{msgs.viewCat_header}">
+				<f:param value="#{sessionBean.currentCategory.topic}"/>
+			</h:outputFormat>
+		</h2>
         <h:form id="createThread">
-            <h3>Make your thread</h3>
+            <h3>#{msgs.viewCat_createThread_header}</h3>
             <table>
                 <tr>
-                    <td>Thread Title:</td>
-                    <td><h:inputText id="threadTopic" value="#{sessionBean.threadTopic}" /></td>
+                    <td>#{msgs.viewCat_createThread_threadTitle}</td>
+                    <td>
+						<h:inputText id="threadTopic" 
+									 value="#{sessionBean.threadTopic}" />
+					</td>
                 </tr>
                 <tr>
-                    <td>First post:</td>
-                    <td><h:inputTextarea rows="5" id="currentText" value="#{sessionBean.currentText}" /></td>
+                    <td>#{msgs.viewCat_createThread_threadPost}</td>
+                    <td>
+						<h:inputTextarea rows="5" 
+										 id="currentText" 
+										 value="#{sessionBean.currentText}" />
+					</td>
                 </tr>
             </table>
-            <h:commandButton value="Opret thread" action="#{sessionBean.createThread()}" />        
+            <h:commandButton value="#{msgs.viewCat_createThread_createButton}" 
+							 action="#{sessionBean.createThread()}" />        
         </h:form>
         <h:form>
             <ui:repeat value="#{sessionBean.currentCategory.threads}" var="thr">
@@ -40,10 +61,26 @@
                         </h:commandLink>
                     </div>
                     <div class="info">
-                        <div class="post-num">(#{thr.postCount} posts)</div>
-                        <div class="-author">Author: #{thr.firstPost.user.username}</div>
-                        <div class="first-date date">Created: #{thr.firstPost.date}</div>
-                        <div class="last-date date">Last post: #{thr.lastPost.date}</div>
+                        <div class="post-num">
+							<h:outputFormat value="#{msgs.viewCat_threadList_postCount}">
+								<f:param value="#{thr.postCount}"/>
+							</h:outputFormat>
+						</div>
+                        <div class="-author">
+							<h:outputFormat value="#{msgs.viewCat_threadList_author}">
+								<f:param value="#{thr.firstPost.user.username}"/>
+							</h:outputFormat>
+						</div>
+                        <div class="first-date date">
+							<h:outputFormat value="#{msgs.viewCat_threadList_created}">
+								<f:param value="#{thr.firstPost.date}"/>
+							</h:outputFormat>
+						</div>
+                        <div class="last-date date">
+							<h:outputFormat value="#{msgs.viewCat_threadList_lastPost}">
+								<f:param value="#{thr.lastPost.date}"/>
+							</h:outputFormat>
+						</div>
                     </div>
 
                 </div>

@@ -6,6 +6,7 @@
 
 package validation;
 
+import java.util.ResourceBundle;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -38,10 +39,12 @@ public class RepeatPasswordValidator implements Validator {
 		String pass2 = value.toString();
 		
 		if (!pass1.equals(pass2)) {
+			ResourceBundle msgs = ResourceBundle.getBundle("properties.msgs", 
+					context.getViewRoot().getLocale());
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR,
-					"Passwords do not match",
-					"Passwords do not match");
+					msgs.getString("opretLogin_error_passwordsDontMatchHeader"),
+					msgs.getString("opretLogin_error_passwordsDontMatch"));
 			throw new ValidatorException(message);
 		}
 	}

@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <title>TODO supply a title</title>
+        <title>#{msgs.createCategory_title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <f:metadata>
@@ -15,15 +15,18 @@
         <header>
             <h:form id="nav"> 
                 <ul>
-                    <li><h:commandLink value="Home" action="index.xhtml"/></li>
+                    <li><h:commandLink value="#{msgs.common_link_index}" 
+									   action="index.xhtml"/>
+					</li>
                 </ul>
             </h:form>
         </header>
 
-        <h3>Skriv titlen på din categori</h3>
+        <h3>#{msgs.createCategory_header}</h3>
         <h:form>
             <h:inputText id="category" value="#{sessionBean.threadTopic}"/>
-            <h:commandButton value="Opret" action="#{sessionBean.createCategory()}"/>
+            <h:commandButton value="#{msgs.createCategory_createButton}" 
+							 action="#{sessionBean.createCategory()}"/>
         </h:form>
     </body>
 </html>

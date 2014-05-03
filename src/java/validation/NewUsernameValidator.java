@@ -6,6 +6,8 @@
 
 package validation;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -38,10 +40,12 @@ public class NewUsernameValidator implements Validator {
 		User otherUser = app.getUserByName(proposedUsername);
 		
 		if (otherUser != null) {
+			ResourceBundle msgs = ResourceBundle.getBundle("properties.msgs", 
+					context.getViewRoot().getLocale());
 			FacesMessage message = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR,
-					"Username already in use",
-					"Username already in use. Please choose another username");
+					msgs.getString("opretLogin_error_usernameTakenHeader"),
+					msgs.getString("opretLogin_error_usernameTaken"));
 			throw new ValidatorException(message);
 		}
 	}

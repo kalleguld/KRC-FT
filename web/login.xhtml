@@ -3,31 +3,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Login</title>
+        <title>#{msgs.login_title}</title>
         <link rel="StyleSheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
         <header>
             <h:form id="nav"> 
                 <ul>
-                    <li><h:commandLink value="Home" action="index.xhtml"/></li>
+                    <li>
+						<h:commandLink value="#{msgs.common_link_index}" 
+									   action="index.xhtml"/>
+					</li>
                 </ul>
             </h:form>
         </header>
         <h:form class="loginform">
-            <h3>Please enter your name and password.</h3>
+            <h3>#{msgs.login_header}</h3>
             <table>
                 <tr>
-                    <td>Name:</td>
+                    <td>#{msgs.login_username}</td>
                     <td><h:inputText id="name" value="#{sessionBean.loginName}" /></td>
                 </tr>
                 <tr>
-                    <td>Password:</td>
+                    <td>#{msgs.login_password}</td>
                     <td><h:inputSecret id="password" value="#{sessionBean.loginPassword}" /></td>
                 </tr>
             </table>
-            <h:commandButton value="Login" action="#{sessionBean.login()}" />
-            <h:commandButton value="Opret ny bruger" action="#{sessionBean.createUser()}" />
+            <h:commandButton value="#{msgs.login_loginButton}" 
+							 action="#{sessionBean.login()}" />
+			<br/>
+			<h:link outcome="/login">
+				#{msgs.common_link_createUser}
+			</h:link>
         </h:form>
     </h:body>
 </html>

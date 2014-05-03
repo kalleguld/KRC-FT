@@ -2,35 +2,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Categories</title>
+        <title>#{msgs.index_title}</title>
         <link rel="StyleSheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
         <header>
         </header>
-        <h:link outcome="/users">Users</h:link>
+        <h1>#{msgs.index_header}</h1>
         <h:panelGroup rendered="#{sessionBean.currentUser == null}" 
                       class="userbox userbox-nouser"
                       layout="block">
-            <h:link class="login-link" outcome="/login">Login</h:link>
+            <h:link class="login-link" outcome="/login">
+				#{msgs.common_link_login}
+			</h:link>
+			<br />
             <h:link class="create-user-link" 
                     outcome="/OpretLogin">
-                Create User
+                #{msgs.common_link_createUser}
             </h:link>
         </h:panelGroup>
         <h:panelGroup rendered="#{sessionBean.currentUser != null}"
                       class="userbox userbox-user"
                       layout="block">
             #{sessionBean.currentUser.username}
+			<br />
+			<h:link rendered="#{sessionBean.currentUser.canManageUsers()}"
+					 outcome="/users">
+				#{msgs.common_link_userlist}
+			</h:link>
+			<br />
+			<h:link rendered="#{sessionBean.currentUser.canCreateCategories()}"
+                    outcome="/createCategory">
+                #{msgs.common_link_createCategory}
+            </h:link>
+			<br />
             <h:form>
                 <h:commandLink action="#{sessionBean.logout()}">
-                    Logout
+                    #{msgs.common_link_logout}
                 </h:commandLink>
             </h:form>
         </h:panelGroup>
-        <h2>Categories:</h2>
+        <h3>#{msgs.index_category_list_header}</h3>
         <h:form>
             <div class="list category-list">
                 <ui:repeat value="#{applicationBean.categories}" var="cat">
@@ -40,22 +55,15 @@
                             #{cat.topic}
                         </h:commandLink>
                         <div class="info">
-                            (#{cat.numThreads} threads)
+							<h:outputFormat value="#{msgs['index_numThreads']}">
+								<f:param value="#{cat.numThreads}" />
+							</h:outputFormat>
                         </div>
                     </div>
                 </ui:repeat>
             </div>
         </h:form>
-        <div class="support">
-            <h:link rendered="#{sessionBean.currentUser.canManageUsers()}"
-                    outcome="/users">
-                User List
-            </h:link>
-            <h:link rendered="#{sessionBean.currentUser.canCreateCategories()}"
-                    outcome="/createCategory">
-                Create new Category
-            </h:link>
-        </div>
+        
     </h:body>
 </html>
 

@@ -2,22 +2,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>
+			#{msgs.viewThr_title}
+			<h:outputFormat value="#{msgs.viewThr_title}">
+				<f:param value="#{sessionBean.currentThread.topic}"/>
+			</h:outputFormat>
+		</title>
 		<link rel="StyleSheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
         <header>
             <h:form id="nav"> 
                 <ul>
-                    <li><h:commandLink value="Home" action="index.xhtml"/></li>
-                    <li><h:commandLink value="#{sessionBean.currentCategory.topic}" action="viewCategory.xhtml"/></li>
+                    <li>
+						<h:commandLink value="#{msgs.common_link_index}" 
+									   action="index.xhtml"/>
+					</li>
+                    <li>
+						<h:commandLink value="#{sessionBean.currentCategory.topic}" 
+									   action="viewCategory.xhtml"/>
+					</li>
                 </ul>
             </h:form>
         </header>
 
-		<h2>#{sessionBean.currentThread.topic}</h2>
+		<h2>
+			<h:outputFormat value="#{msgs.viewThr_header}">
+				<f:param value="#{sessionBean.currentThread.topic}"/>
+			</h:outputFormat>
+		</h2>
 		<ui:repeat value="#{sessionBean.currentThread.posts}" var="post">
 			<div class="post">
 				<div class="content">
@@ -37,16 +53,19 @@
                 <h:form>
                 <div class="createPost">
                     <h3>
-                        Write your Comment
+                        #{msgs.viewThr_newPost_header}
                     </h3>
                     <div>
-                        Comment:
+                        #{msgs.viewThr_newPost_comment}
                     </div>
                     <div>  
-                        <h:inputTextarea id="currentText" rows="5" value="#{sessionBean.postText}"/>
+                        <h:inputTextarea id="currentText" 
+										 rows="5" 
+										 value="#{sessionBean.postText}"/>
                     </div>
                     <div>
-                        <h:commandButton value="Create post" action="#{sessionBean.createPost()}" />
+                        <h:commandButton value="#{msgs.viewThr_newPost_createButton}" 
+										 action="#{sessionBean.createPost()}" />
                     </div>
                     
                 </div>
