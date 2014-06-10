@@ -5,17 +5,20 @@
 	  xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>#{msgs.opretLogin_title}</title>
+        <link rel="stylesheet" href="CSS/CSSLayout.css"/>
     </h:head>
     <h:body>
 		<header>
-            <h:form id="nav"> 
-                <ul>
-                    <li><h:commandLink value="#{msgs.common_link_index}" 
-									   action="index.xhtml"/></li>
-                    <li><h:commandLink value="#{msgs.common_link_login}" 
-									   action="login.xhtml"/></li>
-                </ul>
-            </h:form>
+			<ul>
+				<li>
+					<h:link value="#{msgs.common_link_index}" 
+							outcome="index"/>
+				</li>
+				<li>
+					<h:link value="#{msgs.common_link_login}" 
+							outcome="login"/>
+				</li>
+			</ul>
         </header>
 		<h3>#{msgs.opretLogin_header}</h3>
 		<h:form>

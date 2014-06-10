@@ -46,24 +46,22 @@
             </h:form>
         </h:panelGroup>
         <h3>#{msgs.index_category_list_header}</h3>
-        <h:form>
-            <div class="list category-list">
-                <ui:repeat value="#{applicationBean.categories}" var="cat">
-                    <div class="category">
-                        <h:commandLink action="#{sessionBean.selectCategory(cat)}"
-                                       class="loop-link">
-                            #{cat.topic}
-                        </h:commandLink>
-                        <div class="info">
-							<h:outputFormat value="#{msgs['index_numThreads']}">
-								<f:param value="#{cat.numThreads}" />
-							</h:outputFormat>
-                        </div>
-                    </div>
-                </ui:repeat>
-            </div>
-        </h:form>
-        
+		<div class="list category-list">
+			<ui:repeat value="#{applicationBean.categories}" var="cat">
+				<div class="category">
+					<h:link outcome="viewCategory" 
+							value="#{cat.topic}" 
+							includeViewParams="true">
+						<f:param name="catid" value="#{cat.id}" />
+					</h:link>
+					<div class="info">
+						<h:outputFormat value="#{msgs['index_numThreads']}">
+							<f:param value="#{cat.numThreads}" />
+						</h:outputFormat>
+					</div>
+				</div>
+			</ui:repeat>
+		</div>
     </h:body>
 </html>
 

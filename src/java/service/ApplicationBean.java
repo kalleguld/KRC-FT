@@ -194,4 +194,12 @@ public class ApplicationBean {
 		posts.remove(p.getId());
                 p.getPostthread().deletePost(p);
 	}
+	
+	public void reset() {
+		users.clear();
+		threads.clear();
+		categories.clear();
+		posts.clear();
+		nextCategoryId = nextPostId = nextThreadId = 0;
+	}
 }

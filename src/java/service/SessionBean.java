@@ -31,19 +31,21 @@ public class SessionBean implements Serializable {
     private String currentTopic;
     private User currentUser = null;
     private String postText;
-    private Category currentCategory;
+	
     //Bruges til at lave nye threads
     private String threadTopic;
-    private PostThread currentThread;
     //Bruges til at lave nye Posts
     private String currentText;
-    private Post currentPost;
     //Bruges til at login og out samt oprette nye Users
     private String loginName;
     private String loginPassword;
     private String loginPassRepeat;
     //Bruges til at slette en bestemt bruger
     private User selectedUser;
+	
+	private int currentCategoryId;
+	private int currentThreadId;
+	private int currentPostId;
 
     public User getCurrentUser() {
         return currentUser;
@@ -70,29 +72,45 @@ public class SessionBean implements Serializable {
     }
 
     public Category getCurrentCategory() {
-        return currentCategory;
+        if (currentCategoryId == -1) {
+			return null;
+		} else {
+			Category out = app.getCategoryById(currentCategoryId);
+			return app.getCategoryById(currentCategoryId);
+		}
     }
 
     public void setCurrentCategory(Category currentCategory) {
-        this.currentCategory = currentCategory;
+        if (currentCategory == null) {
+			currentCategoryId = -1;
+		} else {
+			currentCategoryId = currentCategory.getId();
+		}
     }
 
     public PostThread getCurrentThread() {
-        return currentThread;
+        return app.getThreadById(currentThreadId);
     }
 
-    public void setCurrentThread(PostThread currentThread) {
-        this.currentThread = currentThread;
+    public void setCurrentThread(PostThread thread) {
+        if (thread == null) {
+			currentThreadId = -1;
+		} else {
+			currentThreadId = thread.getId();
+		}
     }
 
-    public Post getCurrentPost() {
-        return currentPost;
-    }
-
-    public void setCurrentPost(Post currentPost) {
-        this.currentPost = currentPost;
-    }
-
+	public Post getCurrentPost() {
+		return app.getPostById(currentPostId);
+	}
+	
+	public void setCurrentPost(Post post) {
+		if (post == null) {
+			currentPostId = -1;
+		} else {
+			currentPostId = post.getId();
+		}
+	}
     public String getLoginName() {
         return loginName;
     }
@@ -145,6 +163,38 @@ public class SessionBean implements Serializable {
         this.app = application;
     }
 
+	public int getCurrentCategoryId() {
+		return currentCategoryId;
+	}
+
+	public void setCurrentCategoryId(int currentCategoryId) {
+		this.currentCategoryId = currentCategoryId;
+	}
+
+	public int getCurrentThreadId() {
+		return currentThreadId;
+	}
+
+	public void setCurrentThreadId(int currentThreadId) {
+		this.currentThreadId = currentThreadId;
+		PostThread pt = getCurrentThread();
+		if (pt == null) {
+			setCurrentCategoryId(-1);
+		} else {
+			setCurrentCategoryId(pt.getCategory().getId());
+		}
+	}
+
+	public int getCurrentPostId() {
+		return currentPostId;
+	}
+
+	public void setCurrentPostId(int currentPostId) {
+		this.currentPostId = currentPostId;
+	}
+
+	
+	
     //---------------------------------------------------------------------
     //Rigtige metoder
     public void createUser() {
@@ -213,9 +263,9 @@ public class SessionBean implements Serializable {
         if (currentUser != null) {
             PostThread pt = app.createThread(this.threadTopic,
                     this.currentText,
-                    this.currentCategory,
+                    this.getCurrentCategory(),
                     this.currentUser);
-            this.currentThread = pt;
+            setCurrentThread(pt);
             out = "viewPosts";
         }
         return out;
@@ -239,7 +289,7 @@ public class SessionBean implements Serializable {
     public String createPost() {
         String out = "login";
         if (currentUser != null) {
-            app.createPost(currentThread, postText, currentUser);
+            app.createPost(getCurrentThread(), postText, currentUser);
             out = null;
             postText = null;
         }
@@ -253,25 +303,27 @@ public class SessionBean implements Serializable {
     public String editPost() {
         //TODO where should the user go after editing a post?
         String out = null;
-        if (currentUser == currentPost.getUser()) {
-            currentPost.setText(this.postText);
+        if (currentUser == getCurrentPost().getUser()) {
+            getCurrentPost().setText(this.postText);
         }
         return out;
     }
 
     public String selectCategory(Category c) {
-        currentCategory = c;
+        setCurrentCategory(c);
         return "viewThreads";
     }
 
     public String selectThread(PostThread pt) {
-        currentThread = pt;
+        setCurrentThread(pt);
         return "viewPosts";
     }
 
     // Lav en side der hedder newPost som viser alle posts i en thread
     // Lav en side som viser alle brugere i systemet.
     public String creatAndStoreSomeObjects() {
+		
+		app.reset();
 
         User user1 = app.createUser("Lars", "1234");
         user1.setAdmin(true);

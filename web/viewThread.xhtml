@@ -1,12 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	<f:metadata>
+		<f:viewParam name="thrid" value="#{sessionBean.currentThreadId}" />
+	</f:metadata>
+	
     <h:head>
         <title>
-			#{msgs.viewThr_title}
 			<h:outputFormat value="#{msgs.viewThr_title}">
 				<f:param value="#{sessionBean.currentThread.topic}"/>
 			</h:outputFormat>
@@ -15,18 +18,20 @@
     </h:head>
     <h:body>
         <header>
-            <h:form id="nav"> 
-                <ul>
-                    <li>
-						<h:commandLink value="#{msgs.common_link_index}" 
-									   action="index.xhtml"/>
-					</li>
-                    <li>
-						<h:commandLink value="#{sessionBean.currentCategory.topic}" 
-									   action="viewCategory.xhtml"/>
-					</li>
-                </ul>
-            </h:form>
+			<ul id="nav">
+				<li>
+					<h:link outcome="index.xhtml"
+							value="#{msgs.common_link_index}" />
+				</li>
+				<li>
+					<h:link outcome="viewCategory"
+							value="#{sessionBean.currentCategory.topic}"
+							includeViewParams="true">
+						<f:param name="#{sessionBean.currentCategory.id}"/>
+					</h:link>
+							
+				</li>
+			</ul>
         </header>
 
 		<h2>
@@ -50,26 +55,26 @@
 			</div>
 		</ui:repeat>
                 
-                <h:form>
-                <div class="createPost">
-                    <h3>
-                        #{msgs.viewThr_newPost_header}
-                    </h3>
-                    <div>
-                        #{msgs.viewThr_newPost_comment}
-                    </div>
-                    <div>  
-                        <h:inputTextarea id="currentText" 
+			<h:form>
+				<div class="createPost">
+					<h3>
+						#{msgs.viewThr_newPost_header}
+					</h3>
+					<div>
+						#{msgs.viewThr_newPost_comment}
+					</div>
+					<div>  
+						<h:inputTextarea id="currentText" 
 										 rows="5" 
 										 value="#{sessionBean.postText}"/>
-                    </div>
-                    <div>
-                        <h:commandButton value="#{msgs.viewThr_newPost_createButton}" 
+					</div>
+					<div>
+						<h:commandButton value="#{msgs.viewThr_newPost_createButton}" 
 										 action="#{sessionBean.createPost()}" />
-                    </div>
-                    
-                </div>
-                </h:form>
+					</div>
+
+				</div>
+			</h:form>
     </h:body>
 </html>
 
